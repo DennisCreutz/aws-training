@@ -376,3 +376,4 @@ terraform.rc
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/terraform,intellij+all,eclipse,visualstudiocode,java,node,yarn
+shared-credentials/*
