@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <style>
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 300px;
+      margin: auto;
+      text-align: center;
+      font-family: arial;
+    }
+
+    .price {
+      color: grey;
+      font-size: 22px;
+    }
+
+    .card button {
+      border: none;
+      outline: 0;
+      padding: 12px;
+      color: white;
+      background-color: #000;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      font-size: 18px;
+    }
+
+    .card button:hover {
+      opacity: 0.7;
+    }
+
+
+    .column {
+      float: left;
+      width: 33.33%;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    @media screen and (max-width: 600px) {
+      .column {
+        width: 100%;
+      }
+    }
+  </style>
+  <script type="text/javascript">
+    function getData() {
+      var apiUrl = document.getElementById('endpoint').value;
+      var query = document.getElementById('query').value;
+      fetch(apiUrl+"?query="+query).then(response => {
+        return response.json();
+      }).then(response => {
+        console.log(response);
+        if (response) {
+          appendData(response);
+        }
+      }).catch(err => {
+        console.error(err)
+      });
+    }
+
+    function appendData(data) {
+      console.log('Process data...');
+      var mainContainer = document.getElementById('db_data');
+      mainContainer.innerHTML = "";
+      console.log('length: '+data.length);
+      for (var i = 0; i < data.length; i++) {
+        console.log(data[i]);
+        var div = document.createElement('div');
+        div.innerHTML = data[i].value;
+        mainContainer.appendChild(div);
+        mainContainer.appendChild(document.createElement('hr'));
+      }
+    }
+  </script>
+</head>
+<body>
+<div>
+
+</div>
+<div style='width: 100%; margin: 20px 5px 20px 5px'>
+  <label for="endpoint">API Endpoint URL:</label>
+  <input type="text" id="endpoint" name="endpoint" required
+         minlength="4" size="120">
+</div>
+<div style='width: 100%; margin: 20px 5px 20px 5px'>
+  <label for="query">Query:</label>
+  <input type="text" id="query" name="query" required size="120">
+  <button onclick='getData()'>TRUMP QUOTE</button>
+  <div id='db_data' style='text-align: center'>
+  </div>
+</div>
+</body>
+</html>
