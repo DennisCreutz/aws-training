@@ -1,0 +1,1 @@
+helm install stable/cluster-autoscaler --values=./deployments/cluster-autoscaler/values.yaml --generate-name
